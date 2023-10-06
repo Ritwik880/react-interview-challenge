@@ -65,8 +65,8 @@ const Challenge2 = memo(() => {
 
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
+    
     const handleSubmit = (e) => {
-
         e.preventDefault();
         updateData(URL);
     }

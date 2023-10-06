@@ -82,8 +82,6 @@ const Challenge10 = memo(() => {
                                             alt="Robo Image"
                                             loading="lazy"
                                             onClick={() => handleRemoveImage(item)}
-                                            
-
                                         />
                                     </ImageListItem>
                                 ))}
