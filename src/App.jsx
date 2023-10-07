@@ -9,6 +9,7 @@ import { Routes, Route } from 'react-router-dom';
 
 //css
 import './App.css';
+const Challenge17 = lazy(() => import('./challenge17/Challenge17'));
 const Challenge16 = lazy(() => import('./challenge16/Challenge16'));
 const Challenge15 = lazy(() => import('./challenge15/Challenge15'));
 const Challenge14 = lazy(() => import('./challenge14/Challenge14'));
@@ -61,6 +62,7 @@ const App = () => {
         <Route exact path="/challenge14" element={<Challenge14 />} />
         <Route exact path="/challenge15" element={<Challenge15 />} />
         <Route exact path="/challenge16" element={<Challenge16 />} />
+        <Route exact path="/challenge17" element={<Challenge17 />} />
       </Routes>
     </Suspense>
   )

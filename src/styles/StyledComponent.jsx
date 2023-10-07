@@ -28,7 +28,10 @@ export const OuterWrapper = styled('section')({
 });
 
 export const FormWrapper = styled('form')({
-    paddingBottom: '20px'
+    paddingBottom: '20px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
 });
 
 export const BodyWrapper = styled('section')({
