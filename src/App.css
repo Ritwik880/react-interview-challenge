@@ -1,8 +1,41 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-body{
+
+body {
   min-height: 100vh;
+}
+
+/* pagination.css */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-item {
+  margin: 0 5px;
+  cursor: pointer;
+  list-style: none;
+  display: inline;
+}
+
+.page-link {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  text-decoration: none;
+}
+
+.page-link:hover {
+  background-color: #eee;
+}
+
+.page-item .active {
+  background-color: #007bff !important;
+  color: #fff !important;
 }
