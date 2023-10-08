@@ -1,18 +1,18 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useCallback } from 'react';
 import { Box, Grid, TextField, ImageList, ImageListItem, CircularProgress } from '@mui/material';
 
 import { BodyWrapper } from '../styles/StyledComponent';
 
-const Challenge10 = memo(() => {
+const OptimiseChallenge10 = memo(() => {
     const URL = `https://robohash.org/`;
 
     const [string, setString] = useState('');
     const [loading, setLoading] = useState(false);
     const [allImages, setAllImages] = useState([]);
 
-    const handleGenerateCard = async (input) => {
+    const handleGenerateCard = useCallback(async (input) => {
+        setLoading(true);
         try {
-            setLoading(true);
             const response = await fetch(`${URL}${input}`);
             if (response.ok) {
                 const data = response;
@@ -25,31 +25,35 @@ const Challenge10 = memo(() => {
         } catch (error) {
             setLoading(false);
             console.error("Error fetching data:", error);
+        } finally{
+            setLoading(false);
         }
-    }
+    }, [])
 
-    const handleChange = (value) => {
+    const handleChange = useCallback((value) => {
         setString(value);
-    }
+    }, [])
 
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            const getValue = string.trim();
-            if (getValue === '') {
-                // Clear the image URL if the input is empty
-                setAllImages([]);
-            } else {
-                handleGenerateCard(getValue); // Pass getValue to handleGenerateCard
+    const handleKeyPress = useCallback(
+        (e) => {
+            if (e.key === 'Enter') {
+                const getValue = string.trim();
+                if (getValue === '') {
+                    // Clear the image URL if the input is empty
+                    setAllImages([]);
+                } else {
+                    handleGenerateCard(getValue); // Pass getValue to handleGenerateCard
+                }
             }
-        }
-    }
+        }, [string, handleGenerateCard]
+    )
 
-    const handleRemoveImage = (image) => {
+    const handleRemoveImage = useCallback((image) => {
         setLoading(true);
         const updatedImagesList = allImages.filter((item) => item !== image);
         setAllImages(updatedImagesList);
         setLoading(false);
-    }
+    }, [])
 
     return (
         <BodyWrapper>
@@ -72,10 +76,10 @@ const Challenge10 = memo(() => {
                             <CircularProgress />
                         </Box>
                     ) : (
-                        <Grid item lg={12} md={12}>
-                            <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
-                                {allImages.map((item, index) => (
-                                    <ImageListItem key={index}>
+                        <Grid item lg={12} md={12} display='flex' justifyContent='center' alignItems='center'>
+                            <ImageList sx={{ width: 500, height: 450 }} cols={4} rowHeight={164} alignItems='center'>
+                                {allImages.map((item) => (
+                                    <ImageListItem key={item}>
                                         <img
                                             srcSet={`${item}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                                             src={`${item}?w=164&h=164&fit=crop&auto=format`}
@@ -94,4 +98,4 @@ const Challenge10 = memo(() => {
     );
 });
 
-export default Challenge10;
+export default OptimiseChallenge10;

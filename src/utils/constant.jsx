@@ -92,3 +92,22 @@ export const FIVE =
   "https://images.pexels.com/photos/1010973/pexels-photo-1010973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 export const SIX =
   "https://images.pexels.com/photos/4772874/pexels-photo-4772874.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
+
+export const PILLS =[
+    {
+        "id": 1,
+        "name": 'ALL'
+    },
+    {
+        "id": 2,
+        "name": 'PRO'
+    },
+    {
+        "id": 3,
+        "name": 'ELLITE'
+    },
+    {
+        "id": 4,
+        "name": 'LUXE'
+    } 
+]

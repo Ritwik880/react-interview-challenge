@@ -9,13 +9,18 @@ import { Routes, Route } from 'react-router-dom';
 
 //css
 import './App.css';
+const Challenge20 = lazy(() => import('./challenge20/Challenge20'));
+const Challenge19 = lazy(() => import('./challenge19/Challenge19'));
+const Challenge18 = lazy(() => import('./challenge18/Challenge18'));
 const Challenge17 = lazy(() => import('./challenge17/Challenge17'));
 const Challenge16 = lazy(() => import('./challenge16/Challenge16'));
 const Challenge15 = lazy(() => import('./challenge15/Challenge15'));
+const OptimiseChallenge14 = lazy(() => import('./challenge14/OptimiseChallenge14'));
 const Challenge14 = lazy(() => import('./challenge14/Challenge14'));
 const Challenge13 = lazy(() => import('./challenge13/Challenge13'));
 const Challenge12 = lazy(() => import('./challenge12/Challenge12'));
 const Challenge11 = lazy(() => import('./challenge11/Challenge11'));
+const OptimiseChallenge10 = lazy(() => import('./challenge10/OptimiseChallenge10'));
 const Challenge10 = lazy(() => import('./challenge10/Challenge10'));
 const Challenge9 = lazy(() => import('./challenge9/Challenge9'));
 const Challenge8 = lazy(() => import('./challenge8/Challenge8'));
@@ -56,13 +61,18 @@ const App = () => {
         <Route exact path="/challenge8" element={<Challenge8 />} />
         <Route exact path="/challenge9" element={<Challenge9 />} />
         <Route exact path="/challenge10" element={<Challenge10 />} />
+        <Route exact path="/optimiseChallenge10" element={<OptimiseChallenge10 />} />
         <Route exact path="/challenge11" element={<Challenge11 />} />
         <Route exact path="/challenge12" element={<Challenge12 />} />
         <Route exact path="/challenge13" element={<Challenge13 />} />
         <Route exact path="/challenge14" element={<Challenge14 />} />
+        <Route exact path="/optimiseChallenge14" element={<OptimiseChallenge14 />} />
         <Route exact path="/challenge15" element={<Challenge15 />} />
         <Route exact path="/challenge16" element={<Challenge16 />} />
         <Route exact path="/challenge17" element={<Challenge17 />} />
+        <Route exact path="/challenge18" element={<Challenge18 />} />
+        <Route exact path="/challenge19" element={<Challenge19 />} />
+        <Route exact path="/challenge20" element={<Challenge20 />} />
       </Routes>
     </Suspense>
   )
