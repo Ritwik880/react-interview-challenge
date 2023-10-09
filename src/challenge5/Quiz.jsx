@@ -40,7 +40,6 @@ const Quiz = memo(({ quiz }) => {
     const handleNextQuestion = () => {
         // Advance to the next question
         if (currentQuestionIndex < quiz.length - 1) {
-            console.log(currentQuestionIndex < quiz.length - 1);
             setCurrentQuestionIndex(currentQuestionIndex + 1);
             // setSelectedAnswers('');
         } else {
@@ -58,7 +57,6 @@ const Quiz = memo(({ quiz }) => {
             question: quiz[currentQuestionIndex].question,
             answer: value
         }
-        console.log(answerQuestion);
         const oldAnsweredQuestion = [...answeredQuestion, answerQuestion];
         setAnsweredQuestion(oldAnsweredQuestion);
     };

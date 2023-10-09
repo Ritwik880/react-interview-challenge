@@ -17,7 +17,6 @@ const UserCard = ({ item }) => (
 
 
 const Users = ({ users, loading, total, handleClick }) => {
-  console.log(users);
   return (
     <Box sx={{
       display: 'flex',

@@ -14,7 +14,6 @@ const Challenge8 = memo(() => {
     const userState = useContext(ApiDataContext);
     // const extractedData = Object.keys(userState).map((item) => item);
     const extractUserOnlineInfo = Object.entries(userState);
-    console.log(extractUserOnlineInfo);
 
     return (
         <BodyWrapper>

@@ -18,7 +18,6 @@ const Challenge16 = memo(() => {
             setLoading(true);
             const res = await fetch(uri);
             const data = await res.json();
-            console.log(data);
             setUsers(data.results);
             setTotal(data.info.results);
             setLoading(false);

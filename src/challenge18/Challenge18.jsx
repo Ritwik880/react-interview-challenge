@@ -22,7 +22,6 @@ const Challenge18 = memo(() => {
             const res = await fetch(uri);
             const data = await res.json();
             if (data.status) {
-                console.log(data.data);
                 setUsers(data.data);
             } else {
                 throw new Error(`Failed to fetch data. Status code: ${data.status}`);

@@ -8,7 +8,7 @@ import { Box, Card, CardContent, CardActions, Button, Typography, Grid, TextFiel
 //custom-hook
 import useApi from '../custom-hooks/useApi';
 
-import { Wrapper, InputWrapper } from '../styles/StyledComponent'
+import { Wrapper } from '../styles/StyledComponent'
 
 
 const Challenge1 = memo(() => {
@@ -82,24 +82,37 @@ const Challenge1 = memo(() => {
                         <CircularProgress />
                     </Box>
                 ) : (
-                    <Box>
-                        <InputWrapper><TextField
-                            id="outlined-basic"
-                            label="Search"
-                            variant="outlined"
-                            fullWidth
-                            value={value}
-                            onChange={(e) => handleChange(e.target.value)}
-                        /></InputWrapper>
-
-                        <Grid container spacing={2}>
-                            {value.length > 0 ? (
-                                renderCards(filterItem)
-                            ) : (
-                                renderCards(items)
-                            )}
+                    <>
+                        <Grid container spacing={2} display='flex' justifyContent='center' alignItems='center'>
+                            <Grid item lg={6} md={12}>
+                                <TextField
+                                    id="outlined-basic"
+                                    label="Search"
+                                    variant="outlined"
+                                    fullWidth
+                                    value={value}
+                                    onChange={(e) => handleChange(e.target.value)}
+                                    sx={{marginBottom: '10px'}}
+                                />
+                            </Grid>
+                            <Grid container spacing={2}>
+                                {value.length > 0 ? (
+                                    renderCards(filterItem)
+                                ) : (
+                                    renderCards(items)
+                                )}
+                            </Grid>
+                            <Grid>
+                                {
+                                    items.length === 0 && <Typography>
+                                        No data to show
+                                    </Typography>
+                                }
+                            </Grid>
                         </Grid>
-                    </Box>
+
+
+                    </>
                 )
             }
 

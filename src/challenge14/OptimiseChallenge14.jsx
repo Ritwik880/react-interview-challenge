@@ -15,7 +15,7 @@ const OptimiseChallenge14 = memo(() => {
     const [showData, setShowData] = useState(false);
     const [showButton, setShowButton] = useState(true);
     const [randomNumber, setRandomNumber] = useState(null);
-    const showSnackbar = useSnackbar();
+    const snackbar = useSnackbar();
 
     const getAllImages = async (urls) => {
         try {
@@ -30,11 +30,10 @@ const OptimiseChallenge14 = memo(() => {
                 }
             }))
             setAllData(data);
-            console.log(data);
             setLoading(false);
         } catch (error) {
             setLoading(false);
-            console.error(error.message);
+            snackbar(error.message);
         }
     }
 

@@ -29,7 +29,6 @@ const Challenge6 = memo(() => {
             const trimmedValue = value.trim();
             if (trimmedValue.length > 0) {
                 setStrings([...strings, trimmedValue]);
-                console.log(trimmedValue);
                 setValue('');
             }
         }

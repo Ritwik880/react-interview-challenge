@@ -23,10 +23,9 @@ const Challenge19 = () => {
             setLoading(true);
             const response = await fetch(uri);
             const data = await response.json();
-            console.log(data);
             setUsers(data.results);
             setTotal(data.info.results);
-             (false);
+            setLoading(false);
         } catch (error) {
             setLoading(false);
             snackbar(error.message)

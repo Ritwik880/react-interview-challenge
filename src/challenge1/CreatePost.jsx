@@ -6,8 +6,7 @@ import { Box, Grid, TextField, Button, CircularProgress, Card, CardContent, Card
 
 //library import
 import axios from 'axios';
-import useSnackBar from '../custom-hooks/useSnackBar';
-
+import { useSnackbar } from '../context/SnackBarContext';
 
 
 const OuterWrapper = styled('section')({
@@ -28,6 +27,8 @@ const CreatePost = memo(() => {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    const snackbar = useSnackbar();
+
     const URL = 'https://jsonplaceholder.typicode.com/posts/';
 
 
@@ -40,7 +41,7 @@ const CreatePost = memo(() => {
             setLoading(false);
         } catch (error) {
             setLoading(false);
-            useSnackBar(error.message);
+            snackbar(error.message);
         }
     }
     useEffect(() => {
@@ -60,7 +61,6 @@ const CreatePost = memo(() => {
             }
             else {
                 const data = response.data;
-                console.log(data);
                 setItems((prev) => [...prev, data]);
                 setTitle('');
                 setBody('');
@@ -69,7 +69,7 @@ const CreatePost = memo(() => {
 
         } catch (error) {
             setLoading(false);
-            console.log(error.message);
+            snackbar(error.message);
         }
 
     }

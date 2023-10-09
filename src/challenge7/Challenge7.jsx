@@ -35,7 +35,6 @@ const Challenge7 = memo(() => {
   }, []);
 
   const handleCheckUnCompletedTask = (taskIndex, subtaskIndex) => {
-    console.log(taskIndex, subtaskIndex);
     if (!unCompletedTasks[taskIndex] || !unCompletedTasks[taskIndex].subtasks) {
       return; // Check if the task or subtasks are undefined
     }
@@ -54,11 +53,9 @@ const Challenge7 = memo(() => {
       updatedTasks[taskIndex].subtasks.push(taskToMove);
       return updatedTasks;
     });
-    console.log(taskToMove);
   };
 
   const handleCheckCompletedTask = (taskIndex, subtaskIndex) => {
-    console.log(taskIndex, subtaskIndex);
     if (!completedTasks[taskIndex] || !completedTasks[taskIndex].subtasks) {
       return; // Check if the task or subtasks are undefined
     }
@@ -77,7 +74,6 @@ const Challenge7 = memo(() => {
       updatedTasks[taskIndex].subtasks.push(taskToMove);
       return updatedTasks;
     });
-    console.log(taskToMove);
   };
 
   return (
@@ -101,7 +97,6 @@ const Challenge7 = memo(() => {
                 Not Completed
               </Typography>
               {unCompletedTasks.map((task, taskIndex) => {
-                console.log(task);
                 return (
                   <div key={taskIndex}>
                     <Typography variant="h4" align="center" paddingBottom={3}>
@@ -131,7 +126,6 @@ const Challenge7 = memo(() => {
                 Completed
               </Typography>
               {completedTasks.map((task, taskIndex) => {
-                console.log(task);
                 return (
                   <div key={taskIndex}>
                     <Typography variant="h4" align="center" paddingBottom={3}>

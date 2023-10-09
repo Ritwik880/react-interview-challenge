@@ -1,38 +1,41 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect, memo } from 'react'
+import { BodyWrapper, FormWrapper, CardWrapper, CardContentWrapper } from '../styles/StyledComponent';
+import { Button, Grid, TextField, Typography } from '@mui/material';
 import { useSnackbar } from '../context/SnackBarContext';
-import { BodyWrapper, FormWrapper, CardContentWrapper, CardWrapper } from '../styles/StyledComponent';
-import { Button,  Typography, Grid, TextField } from '@mui/material';
 
-const Challenge20 = memo(() => {
+const Challenge21 = memo(() => {
     const [value, setValue] = useState('');
     const [words, setWords] = useState([]);
-    const [index, setIndex] = useState(0); // Start from index 0
+    const [index, setIndex] = useState(0);
 
     const snackbar = useSnackbar();
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const allWords = value.split(' ');
         if (allWords.length <= 1) {
-            snackbar('Enter more than one word');
-        } else {
+            snackbar('Enter more than one word!')
+        }
+        else {
             setWords(allWords);
-            setIndex(0); // Start displaying from the first word
+            setIndex(0);
             setValue('');
         }
-    };
+    }
 
     useEffect(() => {
         let timer;
         if (words.length > 0 && index < words.length) {
             timer = setInterval(() => {
-                setIndex((prevIndex) => prevIndex + 1); // Increment the index
-            }, 1000); // 1-second delay
+                setIndex((prev) => prev + 1);
+            }, 1000);
         }
 
-        return () => clearInterval(timer);
+        return () => {
+            clearInterval(timer);
+        }
+    }, [words, index])
 
-    }, [words, index]);
 
     return (
         <BodyWrapper>
@@ -46,9 +49,9 @@ const Challenge20 = memo(() => {
                             fullWidth
                             value={value}
                             onChange={(e) => setValue(e.target.value)}
-                            sx={{ marginRight: '10px' }}
+                            sx={{marginRight: '10px'}}
                         />
-                        <Button variant='contained' type='submit' size="large">
+                        <Button variant='contained' type='submit' size='large'>
                             Submit
                         </Button>
                     </FormWrapper>
@@ -57,14 +60,19 @@ const Challenge20 = memo(() => {
                     {
                         words.length !== 0 && <CardWrapper variant='outlined'>
                             <CardContentWrapper>
-                                <Typography>{words.slice(0, index + 1).join(' ')}</Typography>
+                                <Typography>
+                                    {
+                                        words.slice(0, index + 1).join(' ')
+                                    }
+                                </Typography>
                             </CardContentWrapper>
                         </CardWrapper>
                     }
                 </Grid>
             </Grid>
-        </BodyWrapper>
-    );
-});
 
-export default Challenge20;
+        </BodyWrapper>
+    )
+})
+
+export default Challenge21

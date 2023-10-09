@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSnackbar } from '../context/SnackBarContext';
 
 const useApi = (uri) => {
@@ -16,16 +16,18 @@ const useApi = (uri) => {
             setLoading(true);
             const response = await fetch(url);
             const data = await response.json();
-            // Prevent duplicates by checking if the data already exists
+    
+            // Check for duplicates and only add unique items
             const uniqueData = data.filter((newItem) => !items.some((item) => item.id === newItem.id));
             setItems((prev) => [...prev, ...uniqueData]);
+            setItems(uniqueData)
             setFilterData(uniqueData);
             setLoading(false);
         } catch (error) {
             snackbar(error.message);
             setLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
         getData(newUrl);
@@ -34,9 +36,9 @@ const useApi = (uri) => {
 
     //infinite scrolling
     //key points
-    // console.log(document.documentElement.scrollHeight);
-    // console.log(window.innerHeight);
-    // console.log(document.documentElement.scrollTop);
+    // document.documentElement.scrollHeight;
+    // window.innerHeight;
+    // document.documentElement.scrollTop;
 
     //for the end page 
     // innerHeight + screenTop = scrollHeight
