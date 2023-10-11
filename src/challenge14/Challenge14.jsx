@@ -60,7 +60,7 @@ const Challenge14 = memo(() => {
             setShowButton(true);
         }
         else {
-            showSnackbar('Try Again !');
+            snackbar('Try Again !');
         }
     }
 

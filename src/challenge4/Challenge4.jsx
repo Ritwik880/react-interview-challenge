@@ -8,7 +8,7 @@ import { Box, Card, CardContent, CardActions, Button, Typography, Grid, TextFiel
 //custom-hook
 import useApi from '../custom-hooks/useApi';
 
-import { BodyWrapper, InputWrapper } from '../styles/StyledComponent'
+import { BodyWrapper } from '../styles/StyledComponent'
 
 
 const Challenge4 = memo(() => {
@@ -67,28 +67,28 @@ const Challenge4 = memo(() => {
                         <CircularProgress />
                     </Box>
                 ) : (
-                    <Box>
-                        <InputWrapper><TextField
+                    <Grid container spacing={2}>
+                        <TextField
                             id="outlined-basic"
                             label="Search"
                             variant="outlined"
                             fullWidth
                             value={value}
                             onChange={(e) => setValue(e.target.value)}
-                        /></InputWrapper>
+                        />
 
                         <Grid container spacing={2}>
                             {value !== '' ? (
                                 renderCards(items)
                             ) : (
-                                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
                                     <Typography fontSize={30} fontWeight={500} sx={{ paddingTop: '20px' }} color="text.secondary" gutterBottom>
                                         No Data to show!
                                     </Typography>
                                 </Box>
                             )}
                         </Grid>
-                    </Box>
+                    </Grid>
                 )
             }
 

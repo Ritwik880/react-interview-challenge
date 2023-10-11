@@ -4,13 +4,14 @@ import { Box, Grid, TextField, ImageList, ImageListItem, CircularProgress } from
 import { BodyWrapper } from '../styles/StyledComponent';
 
 const Challenge10 = memo(() => {
+
     const URL = `https://robohash.org/`;
 
     const [string, setString] = useState('');
     const [loading, setLoading] = useState(false);
     const [allImages, setAllImages] = useState([]);
 
-    const handleGenerateCard = async (input) => {
+    const handleGenerateImages = async (input) => {
         try {
             setLoading(true);
             const response = await fetch(`${URL}${input}`);
@@ -39,7 +40,7 @@ const Challenge10 = memo(() => {
                 // Clear the image URL if the input is empty
                 setAllImages([]);
             } else {
-                handleGenerateCard(getValue); // Pass getValue to handleGenerateCard
+                handleGenerateImages(getValue); // Pass getValue to handleGenerateImages
             }
         }
     }

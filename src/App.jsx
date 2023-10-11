@@ -9,8 +9,10 @@ import { Routes, Route } from 'react-router-dom';
 
 //css
 import './App.css';
+const Challenge22 = lazy(() => import('./challenge22/Challenge22'));
 const Challenge21 = lazy(() => import('./challenge21/Challenge21'));
 const Challenge20 = lazy(() => import('./challenge20/Challenge20'));
+const OptimiseChallenge20 = lazy(() => import('./challenge20/OptimiseChallenge20'));
 const Challenge19 = lazy(() => import('./challenge19/Challenge19'));
 const Challenge18 = lazy(() => import('./challenge18/Challenge18'));
 const Challenge17 = lazy(() => import('./challenge17/Challenge17'));
@@ -26,6 +28,7 @@ const Challenge10 = lazy(() => import('./challenge10/Challenge10'));
 const Challenge9 = lazy(() => import('./challenge9/Challenge9'));
 const Challenge8 = lazy(() => import('./challenge8/Challenge8'));
 const Challenge7 = lazy(() => import('./challenge7/Challenge7'));
+const OptimiseChallenge6 = lazy(() => import('./challenge6/OptimiseChallenge6'));
 const Challenge6 = lazy(() => import('./challenge6/Challenge6'));
 const Challenge5 = lazy(() => import('./challenge5/Challenge5'));
 const Challenge4 = lazy(() => import('./challenge4/Challenge4'));
@@ -59,6 +62,7 @@ const App = () => {
         <Route path="/challenge4" element={<Challenge4 />} />
         <Route path="/challenge5" element={<Challenge5 />} />
         <Route path="/challenge6" element={<Challenge6 />} />
+        <Route path="/optimiseChallenge6" element={<OptimiseChallenge6 />} />
         <Route path="/challenge7" element={<Challenge7 />} />
         <Route path="/challenge8" element={<Challenge8 />} />
         <Route path="/challenge9" element={<Challenge9 />} />
@@ -75,7 +79,9 @@ const App = () => {
         <Route path="/challenge18" element={<Challenge18 />} />
         <Route path="/challenge19" element={<Challenge19 />} />
         <Route path="/challenge20" element={<Challenge20 />} />
+        <Route path="/optimiseChallenge20" element={<OptimiseChallenge20 />} />
         <Route path="/challenge21" element={<Challenge21 />} />
+        <Route path="/challenge22" element={<Challenge22 />} />
         <Route path="*" element={<NotFound /> } />
       </Routes>
     </Suspense>

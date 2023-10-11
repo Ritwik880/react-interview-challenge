@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Button, Card, CardContent, Typography, Grid, TextField } from '@mui/material';
+import { Box, Card, CardContent, Typography, Grid, TextField } from '@mui/material';
 
 //styles
 export const Wrapper = styled('section')({
@@ -63,4 +63,19 @@ export const CardContentWrapper = styled(CardContent)({
 export const CardWrapper = styled(Card)({
     width: '400px',
     margin: 'auto'
+});
+
+export const BoxWrapper = styled(Box)({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+});
+
+export const LoadingWrapper = styled(Box)({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '60vh',
+    width: '100%'
 });
