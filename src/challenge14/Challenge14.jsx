@@ -1,3 +1,5 @@
+// Write a functional component to prompt a user with a CAPTCHA test, or a “Completely Automated Public Turing Test To Tell Computers and Humans Apart”. This component will be a bare-bones version of the tests you have likely encountered online that ask you to check a box, select all images of crosswalks or busses, etc. In the starter code, I have provided URLs for six images (pictures of digits 1–6). Render a button that, when pressed, displays six images and prompts the user to select one of them; the number that the user is asked to select should be generated randomly when the user clicks the button. If the user clicks the correct image, the component should return to its initial state (only a button, closed modal). If they click the wrong image, issue an alert in the browser, but leave the modal open for the user to try again.
+
 import React, { useState, useEffect, memo } from 'react';
 import { Box, Button, Grid, CircularProgress, ImageList, ImageListItem, Typography } from '@mui/material';
 import { BodyWrapper } from '../styles/StyledComponent';

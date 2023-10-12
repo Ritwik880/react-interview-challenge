@@ -3,7 +3,7 @@ import { BodyWrapper } from './styles/StyledComponent'
 
 const NotFound = () => {
   return (
-    <BodyWrapper>NotFound</BodyWrapper>
+    <>NotFound</>
   )
 }
 

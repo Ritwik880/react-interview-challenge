@@ -1,3 +1,5 @@
+// Write a custom hook called useBitcoin() that returns the value of Bitcoin in US dollars. Every minute, the price should be re-fetched and the returned variable should be updated (this is the same rate at which the API updates the price). To retrieve the price of Bitcoin in US dollars, issue a GET request to the following URL: https://api.coindesk.com/v1/bpi/currentprice.json.
+
 import React, { memo } from 'react';
 import { BodyWrapper, CardWrapper, CardContentWrapper } from '../styles/StyledComponent';
 import { Typography, Box, CircularProgress } from '@mui/material';

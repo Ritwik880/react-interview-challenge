@@ -13,14 +13,14 @@ const Challenge22 = lazy(() => import('./challenge22/Challenge22'));
 const Challenge21 = lazy(() => import('./challenge21/Challenge21'));
 const Challenge20 = lazy(() => import('./challenge20/Challenge20'));
 const OptimiseChallenge20 = lazy(() => import('./challenge20/OptimiseChallenge20'));
-const Challenge19 = lazy(() => import('./challenge19/Challenge19'));
-const Challenge18 = lazy(() => import('./challenge18/Challenge18'));
+const OptimiseChallenge17 = lazy(() => import('./challenge17/OptimiseChallenge17'));
 const Challenge17 = lazy(() => import('./challenge17/Challenge17'));
 const Challenge16 = lazy(() => import('./challenge16/Challenge16'));
 const Challenge15 = lazy(() => import('./challenge15/Challenge15'));
 const OptimiseChallenge14 = lazy(() => import('./challenge14/OptimiseChallenge14'));
 const Challenge14 = lazy(() => import('./challenge14/Challenge14'));
 const Challenge13 = lazy(() => import('./challenge13/Challenge13'));
+const OptimiseChallenge12 = lazy(() => import('./challenge12/OptimiseChallenge12'));
 const Challenge12 = lazy(() => import('./challenge12/Challenge12'));
 const Challenge11 = lazy(() => import('./challenge11/Challenge11'));
 const OptimiseChallenge10 = lazy(() => import('./challenge10/OptimiseChallenge10'));
@@ -70,19 +70,20 @@ const App = () => {
         <Route path="/optimiseChallenge10" element={<OptimiseChallenge10 />} />
         <Route path="/challenge11" element={<Challenge11 />} />
         <Route path="/challenge12" element={<Challenge12 />} />
+        <Route path="/optimiseChallenge12" element={<OptimiseChallenge12 />} />
         <Route path="/challenge13" element={<Challenge13 />} />
         <Route path="/challenge14" element={<Challenge14 />} />
         <Route path="/optimiseChallenge14" element={<OptimiseChallenge14 />} />
         <Route path="/challenge15" element={<Challenge15 />} />
         <Route path="/challenge16" element={<Challenge16 />} />
         <Route path="/challenge17" element={<Challenge17 />} />
-        <Route path="/challenge18" element={<Challenge18 />} />
-        <Route path="/challenge19" element={<Challenge19 />} />
+        <Route path="/optimiseChallenge17" element={<OptimiseChallenge17 />} />
         <Route path="/challenge20" element={<Challenge20 />} />
         <Route path="/optimiseChallenge20" element={<OptimiseChallenge20 />} />
         <Route path="/challenge21" element={<Challenge21 />} />
         <Route path="/challenge22" element={<Challenge22 />} />
-        <Route path="*" element={<NotFound /> } />
+        <Route path="*" element={<NotFound />} />
+
       </Routes>
     </Suspense>
   )

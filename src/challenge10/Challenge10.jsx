@@ -1,3 +1,6 @@
+// Write a functional component that includes a text input field and, below it, a list of images. At the start, the list should be empty. When the user submits some string input-string, the function should append the robot image corresponding to that string to the current list of images. When a user clicks on a robot image, the image should be removed from the list. Finally, if you are inclined to take on styling details, center the input field and display the robot list in centered rows that wrap to the next line after exceeding the page’s width.
+
+
 import React, { memo, useState } from 'react';
 import { Box, Grid, TextField, ImageList, ImageListItem, CircularProgress } from '@mui/material';
 

@@ -14,9 +14,9 @@ const Challenge13 = memo(() => {
 
             // Define the shrinking animation interval
             const shrinkInterval = setInterval(() => {
-                setWidth((prevWidth) => prevWidth - 1);
-                setHeight((prevHeight) => prevHeight - 1);
-            }, 20);
+                setWidth((prevWidth) => prevWidth - 5);
+                setHeight((prevHeight) => prevHeight - 5);
+            }, 500);
 
             // Clear the shrinking interval after 500ms
             setTimeout(() => {
@@ -32,8 +32,8 @@ const Challenge13 = memo(() => {
 
         if (!shrink) {
             timer = setInterval(() => {
-                setWidth((prevWidth) => prevWidth + 1);
-                setHeight((prevHeight) => prevHeight + 1);
+                setWidth((prevWidth) => prevWidth + 5);
+                setHeight((prevHeight) => prevHeight + 5);
             }, 500);
         }
 

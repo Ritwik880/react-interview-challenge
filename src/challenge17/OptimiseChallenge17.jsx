@@ -6,54 +6,56 @@ import { useSnackbar } from '../context/SnackBarContext';
 import { InputWrapper, FormWrapper } from '../styles/StyledComponent';
 import { TextField, Grid, List, ListItem, ListItemText, Button, Typography } from '@mui/material';
 
-const Challenge17 = memo(() => {
-    const [users, setUsers] = useState([]);
-    const [value, setValue] = useState('');
-    const [firstInput, setFirstInput] = useState('');
-    const [secondInput, setSecondInput] = useState('');
-    const [relationships, setRelationships] = useState([]);
+const OptimiseChallenge17 = memo(() => {
+    const [state, setState] = useState({
+        users: [],
+        value: '',
+        firstInput: '',
+        secondInput: '',
+        relation: [],
+    });
+    const { users, value, firstInput, secondInput, relation } = state;
+
     const snackbar = useSnackbar();
 
     const handleChange = (newValue) => {
-        setValue(newValue);
+        setState((prev) => ({ ...prev, value: newValue }));
     }
 
-    const handleNameSubmit = () => {
-        if (value.trim() !== '') {
-            setUsers((prev) => [...prev, value.trim()]);
-            setValue('');
+    const handleKeyPress = (e) => {
+        if (value.trim() !== '' && e.key === 'Enter') {
+            setState((prev) => ({ ...prev, users: [...prev.users, value.trim()], value: '' }));
         } else {
             snackbar('You are not supposed to enter empty values!');
         }
     }
 
-    const handleRelationshipSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
+
         const firstUser = firstInput.trim();
         const secondUser = secondInput.trim();
 
         if (firstUser !== '' && secondUser !== '') {
             if (users.includes(firstUser) && users.includes(secondUser)) {
-                setRelationships((prev) => [
+                setState((prev) => ({
                     ...prev,
-                    {
-                        follower: firstUser,
-                        following: secondUser,
-                    },
-                    {
-                        follower: secondUser,
-                        following: firstUser,
-                    },
-                ]);
+                    relation: [
+                        ...prev.relation,
+                        {
+                            follower: firstUser,
+                            following: secondUser,
+                        },
+                    ],
+                    firstInput: '',
+                    secondInput: '',
+                }));
             } else {
                 snackbar('Both names should exist in the list of users.');
             }
         } else {
             snackbar('You are not supposed to enter empty values!');
         }
-
-        setFirstInput('');
-        setSecondInput('');
     }
 
     return (
@@ -63,76 +65,78 @@ const Challenge17 = memo(() => {
                     <InputWrapper>
                         <TextField
                             id="outlined-basic"
-                            label="Enter a Name"
+                            label="Search"
                             variant="outlined"
                             fullWidth
                             value={value}
                             onChange={(e) => handleChange(e.target.value)}
+                            onKeyDown={handleKeyPress}
                         />
-                        <Button
-                            size="medium"
-                            variant="contained"
-                            onClick={handleNameSubmit}
-                        >
-                            Submit Name
-                        </Button>
                     </InputWrapper>
                 </Grid>
 
                 <Grid item lg={12} md={12}>
-                    {users.length ? (
-                        users.map((item, index) => (
-                            <List key={index}>
-                                <ListItem>
-                                    <ListItemText primary={`Name: ${item}`} />
-                                </ListItem>
-                            </List>
-                        ))
-                    ) : (
-                        <Typography>No Users Found!</Typography>
-                    )}
+                    {
+                        users.length ? (
+                            users.map((item, index) => (
+                                <List key={index}>
+                                    <ListItem>
+                                        <ListItemText primary={`Name: ${item}`} />
+                                    </ListItem>
+                                </List>
+                            ))
+                        ) : (
+                            <Typography>No Users Found!</Typography>
+                        )
+                    }
                 </Grid>
-                <FormWrapper onSubmit={handleRelationshipSubmit}>
-                    <Grid container spacing={2} display="flex" justifyContent="center" alignItems="center">
+                <FormWrapper onSubmit={handleSubmit}>
+                    <Grid container spacing={2} display='flex' justifyContent='center' alignItems='center'>
                         <Grid item lg={12} xs={12}>
                             <TextField
                                 required
-                                placeholder="Enter First Name"
+                                placeholder='Enter Name'
+                                id="my-input"
                                 aria-describedby="my-helper-text"
                                 fullWidth
                                 value={firstInput}
-                                onChange={(e) => setFirstInput(e.target.value)}
+                                onChange={(e) => setState({ ...state, firstInput: e.target.value })}
                             />
                         </Grid>
                         <Grid item lg={12} xs={12}>
                             <TextField
                                 required
-                                placeholder="Enter Second Name"
+                                placeholder='Enter Name'
+                                id="my-input2"
                                 aria-describedby="my-helper-text2"
                                 fullWidth
                                 value={secondInput}
-                                onChange={(e) => setSecondInput(e.target.value)}
+                                onChange={(e) => setState({ ...state, secondInput: e.target.value })}
                             />
                         </Grid>
                         <Grid item lg={6} xs={12}>
-                            <Button size="medium" type="submit" variant="contained">
-                                Create Relationship
-                            </Button>
+                            <Button size="medium" type='submit' variant='contained'>Submit</Button>
                         </Grid>
                     </Grid>
                 </FormWrapper>
                 <Grid item lg={12} md={12}>
-                    {relationships.map((item, index) => (
-                        <List key={index}>
-                            <ListItem>
-                                <ListItemText primary={`${item.follower} is following ${item.following}`} />
-                            </ListItem>
-                        </List>
-                    ))}
+                    {
+                        relation && relation.map((item, index) => {
+                            return (
+                                <List key={index}>
+                                    <ListItem>
+                                        <ListItemText
+                                            primary={`${item.follower} will now follow ${item.following}`}
+                                        />
+                                    </ListItem>
+                                </List>
+                            )
+                        })
+                    }
                 </Grid>
             </Grid>
         </BodyWrapper>
     );
 });
 
-export default Challenge17;
+export default OptimiseChallenge17
