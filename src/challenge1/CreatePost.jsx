@@ -1,26 +1,14 @@
 import React, { memo, useState, useEffect } from 'react';
 
 //mui
-import { styled } from "@mui/material/styles";
 import { Box, Grid, TextField, Button, CircularProgress, Card, CardContent, CardActions, Typography } from '@mui/material';
+
+import { OuterWrapper, FormWrapper } from '../styles/StyledComponent';
 
 //library import
 import axios from 'axios';
 import { useSnackbar } from '../context/SnackBarContext';
 
-
-const OuterWrapper = styled('section')({
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-    padding: '100px',
-});
-
-const FormWrapper = styled('form')({
-    paddingBottom: '20px'
-});
 const CreatePost = memo(() => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');

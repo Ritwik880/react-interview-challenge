@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Box, Card, CardContent, Typography, Grid, TextField } from '@mui/material';
+import { Box, Card, CardContent } from '@mui/material';
 
 //styles
 export const Wrapper = styled('section')({

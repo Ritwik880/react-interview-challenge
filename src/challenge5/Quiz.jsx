@@ -2,8 +2,8 @@ import React, { useState, useEffect, memo } from 'react';
 
 //mui
 import CircularProgress from '@mui/material/CircularProgress';
-import { Box, Card, CardContent, Radio, FormControl, RadioGroup, FormControlLabel, FormLabel, Typography } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
+import { Box, Card, CardContent, Radio, FormControl, RadioGroup, FormControlLabel, FormLabel, Typography, Grid } from '@mui/material';
+// import Grid from '@mui/material/Unstable_Grid2';
 
 import { BodyWrapper } from '../styles/StyledComponent'
 

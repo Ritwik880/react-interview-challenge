@@ -3,22 +3,11 @@ import { useParams } from 'react-router-dom';
 
 
 //mui import
-import { styled } from "@mui/material/styles";
 import CircularProgress from '@mui/material/CircularProgress';
 import { Box, Card, CardContent, Typography, Grid } from '@mui/material';
 import useIndividualApi from '../custom-hooks/useIndividualApi';
 
-
-
-//styles
-const MainWrapper = styled('section')({
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-    padding: '100px',
-    height: '100vh'
-});
+import { UserWrapper } from '../styles/StyledComponent';
 
 
 const IndividualPost = memo(() => {
