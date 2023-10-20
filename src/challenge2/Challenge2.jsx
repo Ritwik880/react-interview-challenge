@@ -3,22 +3,20 @@ import React, { useState, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 //mui
-import { Grid, TextField, Button, InputAdornment } from '@mui/material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { Grid, TextField } from '@mui/material';
 
 //library import
 import axios from 'axios';
 import { useSnackbar } from '../context/SnackBarContext';
 
 import { OuterWrapper, FormWrapper } from '../styles/StyledComponent'
+import { LoadingButton } from '@mui/lab';
 
 
 const Challenge2 = memo(() => {
     const [items, setItems] = useState([]);
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const URL = 'https://jsonplaceholder.typicode.com/posts/';
@@ -47,9 +45,9 @@ const Challenge2 = memo(() => {
             else {
                 const data = response.data;
                 setItems((prevItems) => [...prevItems, data]);
+                localStorage.setItem('items', JSON.stringify(updatedItems));
                 const existingItems = JSON.parse(localStorage.getItem('items')) || [];
                 const updatedItems = [...existingItems, data];
-                localStorage.setItem('items', JSON.stringify(updatedItems));
                 setTitle('');
                 setBody('');
                 setLoading(false);
@@ -62,9 +60,6 @@ const Challenge2 = memo(() => {
         }
 
     }
-
-    const handleClickShowPassword = () => setShowPassword(!showPassword);
-    const handleMouseDownPassword = () => setShowPassword(!showPassword);
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -90,7 +85,7 @@ const Challenge2 = memo(() => {
                     </Grid>
                     <Grid item lg={6} xs={12}>
                         <TextField
-                            type={showPassword ? "text" : "password"}
+                            type="text"
                             required
                             placeholder='Enter Description'
                             id="my-input2"
@@ -98,22 +93,12 @@ const Challenge2 = memo(() => {
                             fullWidth
                             value={body}
                             onChange={(e) => setBody(e.target.value)}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment sx={{ cursor: 'pointer' }} position='end' onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}>
-                                        {
-                                            showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />
-                                        }
-                                    </InputAdornment>
-                                )
-                            }}
                             error={!isBodyValid(body)}
                             helperText={!isBodyValid(body) ? 'Body must be at least 5 characters long' : ''}
                         />
                     </Grid>
                     <Grid item lg={6} xs={12}>
-                        <Button size="medium" type='submit' variant='contained' >Add Post</Button>
+                        <LoadingButton size="medium" type='submit' variant='contained' loading={loading}>Add Post</LoadingButton>
                     </Grid>
                 </Grid>
             </FormWrapper>

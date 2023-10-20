@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import ApiDataContext from "./context"
+import React, {useState, useEffect, useContext} from "react";
+import ApiDataContext from "./context";
 
-const ApiDataProvider = ({children}) => {
+const ApiDataProvider = ({children})=>{
     const [userState, setUserState] = useState({
         Bob: true,
         Gary: false,
@@ -11,13 +11,15 @@ const ApiDataProvider = ({children}) => {
     });
 
     useEffect(() => {
-        setUserState(userState);
+     setUserState(userState);
     }, [])
-    
+
     return (
         <ApiDataContext.Provider value={userState}>
             {children}
         </ApiDataContext.Provider>
     )
-} 
-export default ApiDataProvider 
+    
+}
+
+export default ApiDataProvider

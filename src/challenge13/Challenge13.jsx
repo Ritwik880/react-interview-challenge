@@ -16,7 +16,7 @@ const Challenge13 = memo(() => {
             const shrinkInterval = setInterval(() => {
                 setWidth((prevWidth) => prevWidth - 5);
                 setHeight((prevHeight) => prevHeight - 5);
-            }, 500);
+            }, 20);
 
             // Clear the shrinking interval after 500ms
             setTimeout(() => {

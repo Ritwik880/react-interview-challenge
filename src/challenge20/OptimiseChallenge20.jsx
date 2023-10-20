@@ -1,73 +1,75 @@
-// Write a functional component that accepts an extended piece of text from the user and prints the text to the screen, beginning with the first word and appending the next word every half-second until the entire text is displayed on the screen. For example, if the user submits “Hi my name is Bob”, the screen should read “Hi”, then “Hi my”, then “Hi my name”, and so on. If the user submits another piece of text reset the display and begin printing the new text. 
-
 import React, { useState, useEffect, memo } from 'react';
+import { Box, CircularProgress, Grid, Slider, ImageListItem, Typography } from '@mui/material';
 import { useSnackbar } from '../context/SnackBarContext';
-import { BodyWrapper, FormWrapper, CardContentWrapper, CardWrapper } from '../styles/StyledComponent';
-import { Button, Typography, Grid, TextField } from '@mui/material';
 
 const OptimiseChallenge20 = memo(() => {
-    const [value, setValue] = useState('');
-    const [words, setWords] = useState([]);
-    const [index, setIndex] = useState(0); // Start from index 0
+    const URL = `https://picsum.photos/seed/sameimage/300`;
+
+    const [allImages, setAllImages] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [blurLevel, setBlurLevel] = useState(0);
+
     const snackbar = useSnackbar();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const allWords = value.split(' ');
-        if (allWords.length <= 1) {
-            snackbar('Enter more than one word');
-        } else {
-            setWords(allWords);
-            setIndex(0); // Start displaying from the first word
-            setValue('');
-            clearInterval(timer); // Clear the timer when submitting
+    const handleGenerateImage = async (uri) => {
+        try {
+            const response = await fetch(uri);
+            if (response.ok) {
+                const data = response;
+                setAllImages(data.url);
+            }
+        } catch (error) {
+            snackbar(error.message);
+        } finally {
+            setLoading(false);
         }
-    };
+    }
+
+    const handleBlurChange = (event, newValue) => {
+        setBlurLevel(newValue);
+    }
 
     useEffect(() => {
-        let timer;
-        if (words.length > 0 && index < words.length) {
-            timer = setInterval(() => {
-                setIndex((prevIndex) => prevIndex + 1);
-            }, 1000);
-        }
-
-        return () => clearInterval(timer);
-
-    }, [words, index]);
-
-    let timer; // Declare timer outside of useEffect
+        handleGenerateImage(URL);
+    }, []);
 
     return (
-        <BodyWrapper>
-            <Grid container spacing={2} display='flex' justifyContent='center' alignItems='center'>
-                <Grid item lg={6} md={12}>
-                    <FormWrapper onSubmit={handleSubmit}>
-                        <TextField
-                            id='outlined-basic'
-                            label='Search'
-                            variant='outlined'
-                            fullWidth
-                            value={value}
-                            onChange={(e) => setValue(e.target.value)}
-                            sx={{ marginRight: '10px' }}
+        <Box p={2}>
+            {loading ? (
+                <Box display="flex" justifyContent="center" alignItems="center">
+                    <CircularProgress />
+                </Box>
+            ) : (
+                <Grid container spacing={2}>
+                    <ImageListItem>
+                        <img
+                            src={`${allImages}&blur=${blurLevel}`}
+                            alt="Image"
+                            loading="lazy"
+                            style={{ filter: `blur(${blurLevel}px)` }}
                         />
-                        <Button variant='contained' type='submit' size="large">
-                            Submit
-                        </Button>
-                    </FormWrapper>
+                    </ImageListItem>
+
+                    <Box pt={2}>
+                        <Slider
+                            value={blurLevel}
+                            onChange={handleBlurChange}
+                            min={0}
+                            max={20}
+                            step={1}
+                            aria-label="Blur"
+                            valueLabelDisplay="auto"
+                        />
+                    </Box>
+
+                    <Box pt={2}>
+                        <Typography variant="h5" align="center">
+                            Blur level: {blurLevel}px
+                        </Typography>
+                    </Box>
                 </Grid>
-                <Grid item lg={12} md={6} xs={12}>
-                    {words.length !== 0 && (
-                        <CardWrapper variant='outlined'>
-                            <CardContentWrapper>
-                                <Typography>{words.slice(0, index + 1).join(' ')}</Typography>
-                            </CardContentWrapper>
-                        </CardWrapper>
-                    )}
-                </Grid>
-            </Grid>
-        </BodyWrapper>
+            )}
+        </Box>
     );
 });
 

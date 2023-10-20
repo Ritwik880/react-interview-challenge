@@ -41,7 +41,7 @@ const Timer = ({ seconds, removeTimer }) => {
     )
 };
 
-const OptimiseChallenge23 = memo(() => {
+const OptimiseChallenge21 = memo(() => {
     const [inputValue, setInputValue] = useState('');
     const [timers, setTimers] = useState([]);
 
@@ -99,4 +99,4 @@ const OptimiseChallenge23 = memo(() => {
     );
 });
 
-export default OptimiseChallenge23;
+export default OptimiseChallenge21;

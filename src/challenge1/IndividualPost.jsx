@@ -7,9 +7,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { Box, Card, CardContent, Typography, Grid } from '@mui/material';
 import useIndividualApi from '../custom-hooks/useIndividualApi';
 
-import { UserWrapper } from '../styles/StyledComponent';
+import { BodyWrapper, UserWrapper } from '../styles/StyledComponent';
 
-
+// import MainWra
 const IndividualPost = memo(() => {
     const { id } = useParams();
     const URL = `https://jsonplaceholder.typicode.com/posts/${id}`;
@@ -17,7 +17,7 @@ const IndividualPost = memo(() => {
     const {items, loading} = useIndividualApi(URL);
 
     return (
-        <MainWrapper>
+        <BodyWrapper>
             {
                 loading ? (
                     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
@@ -49,7 +49,7 @@ const IndividualPost = memo(() => {
                 )
             }
 
-        </MainWrapper>
+        </BodyWrapper>
     )
 })
 

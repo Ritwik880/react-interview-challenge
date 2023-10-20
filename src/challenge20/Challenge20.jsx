@@ -1,72 +1,94 @@
-// Write a functional component that accepts an extended piece of text from the user and prints the text to the screen, beginning with the first word and appending the next word every half-second until the entire text is displayed on the screen. For example, if the user submits “Hi my name is Bob”, the screen should read “Hi”, then “Hi my”, then “Hi my name”, and so on. If the user submits another piece of text reset the display and begin printing the new text. 
+// Write a functional component called CustomBlur to render an image from Lorem Picsum. Below it, include a slider that allows the user to adjust the blur effect on the image. If you use the native img element as I do in the solution below, be sure to include a seed in the image so that the image is not replaced as the blur parameter changes. 
 
 import React, { useState, useEffect, memo } from 'react';
+import { BodyWrapper } from '../styles/StyledComponent';
+import { Box, CircularProgress, Grid, Slider, ImageListItem, Typography } from '@mui/material';
 import { useSnackbar } from '../context/SnackBarContext';
-import { BodyWrapper, FormWrapper, CardContentWrapper, CardWrapper } from '../styles/StyledComponent';
-import { Button,  Typography, Grid, TextField } from '@mui/material';
+const Challenge20 = memo((() => {
 
-const Challenge20 = memo(() => {
-    const [value, setValue] = useState('');
-    const [words, setWords] = useState([]);
-    const [index, setIndex] = useState(0); // Start from index 0
+    const URL = `https://picsum.photos/seed/sameimage/300`;
+
+    const [allImages, setAllImages] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [blurLevel, setBlurLevel] = useState(0);
 
     const snackbar = useSnackbar();
-    
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const allWords = value.split(' ');
-        if (allWords.length <= 1) {
-            snackbar('Enter more than one word');
-        } else {
-            setWords(allWords);
-            setIndex(0); // Start displaying from the first word
-            setValue('');
+
+    const handleGenerateImage = async (uri) => {
+        try {
+            setLoading(true);
+            const response = await fetch(uri);
+            if (response.ok) {
+                const data = response;
+                console.log(data.url);
+                setAllImages(data.url);
+                setLoading(false);
+            }
+        } catch (error) {
+            setLoading(false);
+            snackbar(error.message);
         }
-    };
+    }
+
+    const handleBlurChange = (event, newValue) => {
+        setBlurLevel(newValue);
+    }
 
     useEffect(() => {
-        let timer;
-        if (words.length > 0 && index < words.length) {
-            timer = setInterval(() => {
-                setIndex((prevIndex) => prevIndex + 1); // Increment the index
-            }, 1000); // 1-second delay
-        }
+        handleGenerateImage(URL)
+    }, [])
 
-        return () => clearInterval(timer);
 
-    }, [words, index]);
+    const imageStyle = {
+        filter: `blur(${blurLevel}px)`,
+    };
+
 
     return (
         <BodyWrapper>
-            <Grid container spacing={2} display='flex' justifyContent='center' alignItems='center'>
-                <Grid item lg={6} md={12}>
-                    <FormWrapper onSubmit={handleSubmit}>
-                        <TextField
-                            id='outlined-basic'
-                            label='Search'
-                            variant='outlined'
-                            fullWidth
-                            value={value}
-                            onChange={(e) => setValue(e.target.value)}
-                            sx={{ marginRight: '10px' }}
-                        />
-                        <Button variant='contained' type='submit' size="large">
-                            Submit
-                        </Button>
-                    </FormWrapper>
-                </Grid>
-                <Grid item lg={12} md={6} xs={12}>
+            <Box>
+                <Grid container spacing={2}>
                     {
-                        words.length !== 0 && <CardWrapper variant='outlined'>
-                            <CardContentWrapper>
-                                <Typography>{words.slice(0, index + 1).join(' ')}</Typography>
-                            </CardContentWrapper>
-                        </CardWrapper>
+                        loading ? (
+                            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <CircularProgress />
+                            </Box>
+                        ) : (
+                            <Grid>
+                                <ImageListItem>
+                                    <img srcSet={allImages}
+                                        src={allImages}
+                                        alt='Image'
+                                        loading='lazy'
+                                        style={imageStyle}
+                                    />
+                                </ImageListItem>
+
+                                <Box sx={{ paddingTop: '20px' }}>
+                                    <Slider
+                                        value={blurLevel}
+                                        onChange={handleBlurChange}
+                                        min={0}
+                                        max={20}
+                                        step={1}
+                                        aria-label="Blur"
+                                        valueLabelDisplay="auto"
+                                        color='secondary'
+                                    />
+                                </Box>
+                                <Box sx={{ paddingTop: '20px' }}>
+                                  <Typography fontSize={30} textAlign='center'>
+                                    Blur level: {blurLevel}px
+                                  </Typography>
+                                </Box>
+                            </Grid>
+
+                        )
                     }
                 </Grid>
-            </Grid>
+            </Box>
         </BodyWrapper>
-    );
-});
+    )
+}))
 
-export default Challenge20;
+export default Challenge20
