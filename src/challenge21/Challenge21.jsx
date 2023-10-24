@@ -1,3 +1,5 @@
+// Write a functional component called “Timers” that renders a centered input field and button at the top of the screen, along with a (wrapping) row of countdowns below it. The input field should accept a positive number of seconds from the user, and when the button is pressed, a new timer should be appended to the row and begin counting down from the user-specified number of seconds. When the timer reaches 0, it should be automatically removed from the row.
+
 import React, { useState, useEffect, memo } from 'react';
 import { BodyWrapper, CardContentWrapper } from '../styles/StyledComponent';
 import { Box, TextField, Grid, Button, Card, Typography } from '@mui/material';
@@ -40,7 +42,7 @@ const Timer = ({ seconds, removeTimer }) => {
         </Grid>
     )
 };
-const Challenge21 = memo((() => {
+const Challenge23 = memo((() => {
 
     const [inputValue, setInputValue] = useState('');
     const [timers, setTimers] = useState([]);
@@ -103,6 +105,6 @@ const Challenge21 = memo((() => {
     )
 }))
 
-export default Challenge21
+export default Challenge23
 
 

@@ -1,9 +1,9 @@
-import React, { useState, useEffect, memo, useCallback } from 'react';
+import React, { useState, useEffect, memo, useCallback, useRef } from 'react';
 import { BodyWrapper, CardContentWrapper } from '../styles/StyledComponent';
 import { Box, TextField, Grid, Button, Card, Typography } from '@mui/material';
 import TimerOutlinedIcon from '@mui/icons-material/TimerOutlined';
 
-const Timer = ({ seconds, removeTimer }) => {
+const Timer = memo(({ seconds, removeTimer }) => {
     const [time, setTime] = useState(seconds);
 
     useEffect(() => {
@@ -30,20 +30,21 @@ const Timer = ({ seconds, removeTimer }) => {
                             <TimerOutlinedIcon />
                         </Grid>
                         <Grid>
-                            <Typography sx={{ fontSize: 14 }} color="text.secondary">
-                                {`${time}s`}
+                            <Typography fontSize={16} fontWeight={600} color="text.secondary">
+                                {time}s
                             </Typography>
                         </Grid>
                     </Grid>
                 </CardContentWrapper>
             </Card>
         </Grid>
-    )
-};
+    );
+});
 
 const OptimiseChallenge21 = memo(() => {
     const [inputValue, setInputValue] = useState('');
     const [timers, setTimers] = useState([]);
+    const timerIdCounter = useRef(0);
 
     const handleAddTimer = useCallback(() => {
         const seconds = parseInt(inputValue, 10);
@@ -53,47 +54,44 @@ const OptimiseChallenge21 = memo(() => {
                 ...prevTimers,
                 {
                     seconds,
-                    id: new Date().getTime(),
+                    id: timerIdCounter.current++,
                 },
             ]);
             setInputValue('');
         }
-    }, [inputValue, setTimers]);
+    }, [inputValue]);
 
     const removeTimer = useCallback((id) => {
         setTimers((prevTimers) => prevTimers.filter((timer) => timer.id !== id));
-    }, [setTimers]);
+    }, []);
 
     return (
         <BodyWrapper>
             <Box>
-                <Grid container spacing={2}>
-                    <Grid item lg={12} md={12}>
-                        <FormWrapper>
-                            <TextField
-                                id="outlined-basic"
-                                label="Search"
-                                variant="outlined"
-                                fullWidth
-                                value={inputValue}
-                                onChange={(e) => setInputValue(e.target.value)}
-                                sx={{ marginRight: '10px' }}
-                            />
-                            <Button variant="contained" type="submit" size="medium" onClick={handleAddTimer}>
-                                Add Timer
-                            </Button>
-                        </FormWrapper>
-                    </Grid>
-                    <Grid container spacing={2} marginTop={2}>
-                        {timers.map((timer, index) => (
-                            <Timer
-                                key={index}
-                                seconds={timer.seconds}
-                                removeTimer={() => removeTimer(timer.id)}
-                            />
-                        ))}
-                    </Grid>
+                <Grid item lg={12} md={12}>
+                    <TextField
+                        id='outlined-basic'
+                        label='Search'
+                        variant='outlined'
+                        fullWidth
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        sx={{ marginRight: '10px' }}
+                    />
+                    <Button variant='contained' type='submit' size="medium" onClick={handleAddTimer} sx={{ marginTop: '6px' }}>
+                        Add Timer
+                    </Button>
                 </Grid>
+                <Grid container spacing={2} marginTop={2}>
+                    {timers.map((timer) => (
+                        <Timer key={timer.id} seconds={timer.seconds} removeTimer={() => removeTimer(timer.id)} />
+                    ))}
+                </Grid>
+                {timers.length === 0 && (
+                    <Typography fontSize={16} fontWeight={600} color="text.secondary" textAlign='center'>
+                        No timers found!
+                    </Typography>
+                )}
             </Box>
         </BodyWrapper>
     );

@@ -7,12 +7,16 @@ import { BodyWrapper } from '../styles/StyledComponent';
 const PostPage = memo(() => {
     const location = useLocation();
     const { state } = location;
-    const [items, setItems] = useState(() => JSON.parse(localStorage.getItem('items')) || []);
-    const [isLoading, setIsLoading] = useState(true);
+    const itemsFromState = state.items || []; // Use the data from the state
+    const [items, setItems] = useState(itemsFromState); // Initialize state with the data from state
+    const [isLoading, setIsLoading] = useState(false); // Initially, set isLoading to false
 
     useEffect(() => {
+        setIsLoading(true); // Set isLoading to true before loading data
+
+        // Simulate loading for 3 seconds, replace this with your actual data loading logic
         const loadingTimer = setTimeout(() => {
-            setIsLoading(false);
+            setIsLoading(false); // After loading, set isLoading to false
         }, 3000);
 
         return () => {

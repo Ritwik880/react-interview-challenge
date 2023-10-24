@@ -10,7 +10,9 @@ import { Routes, Route } from 'react-router-dom';
 //css
 import './App.css';
 const Challenge22 = lazy(() => import('./challenge22/Challenge22'));
+const OptimiseChallenge21 = lazy(() => import('./challenge21/OptimiseChallenge21'));
 const Challenge21 = lazy(() => import('./challenge21/Challenge21'));
+const OptimiseChallenge20 = lazy(() => import('./challenge20/OptimiseChallenge20'));
 const Challenge20 = lazy(() => import('./challenge20/Challenge20'));
 const Challenge19 = lazy(() => import('./challenge19/Challenge19'));
 const Challenge18 = lazy(() => import('./challenge18/Challenge18'));
@@ -84,7 +86,9 @@ const App = () => {
         <Route path="/optimiseChallenge18" element={<OptimiseChallenge18 />} />
         <Route path="/challenge19" element={<Challenge19 />} />
         <Route path="/challenge20" element={<Challenge20 />} />
+        <Route path="/optimiseChallenge20" element={<OptimiseChallenge20 />} />
         <Route path="/challenge21" element={<Challenge21 />} />
+        <Route path="/optimiseChallenge21" element={<OptimiseChallenge21 />} />
         <Route path="/challenge22" element={<Challenge22 />} />
         <Route path="*" element={<NotFound />} />
 

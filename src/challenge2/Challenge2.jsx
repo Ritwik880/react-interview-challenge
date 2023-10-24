@@ -40,27 +40,26 @@ const Challenge2 = memo(() => {
                 body: body,
             });
             if (response.status !== 201) {
-                return
-            }
-            else {
+                return;
+            } else {
                 const data = response.data;
                 setItems((prevItems) => [...prevItems, data]);
-                localStorage.setItem('items', JSON.stringify(updatedItems));
                 const existingItems = JSON.parse(localStorage.getItem('items')) || [];
                 const updatedItems = [...existingItems, data];
+                localStorage.setItem('items', JSON.stringify(updatedItems));
                 setTitle('');
                 setBody('');
                 setLoading(false);
-                navigate('/postPage', { state: { items: [...items, data] } });
-            }
 
+                navigate('/postPage', { state: { items: updatedItems } });
+            }
         } catch (error) {
             setLoading(false);
             snackbar(error.message);
         }
-
     }
-    
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         updateData(URL);
