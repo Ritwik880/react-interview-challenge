@@ -2,61 +2,66 @@
 
 import React, { memo } from 'react';
 import ReactPaginate from 'react-paginate';
-import { CircularProgress, Grid, Card, CardContent, Typography } from '@mui/material';
-import { BoxWrapper, LoadingWrapper } from '../styles/StyledComponent';
+import { CircularProgress, Grid } from '@mui/material';
+import { LoadingWrapper } from '../styles/StyledComponent';
+import { LoadingButton } from '@mui/lab';
 
 // Extract UserCard component
 const UserCard = ({ item }) => {
-    const { name } = item;
-    const firstName = name?.first || 'User';
-    const lastName = name?.last || 'Test';
-  
-    return (
-      <Grid item lg={4} md={6} xs={12}>
-        <Card variant="outlined">
-          <CardContent>
-            <Typography sx={{ fontSize: 14 }}>
-              {`${firstName} ${lastName}`}
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-    );
-  };
+  const { name, picture, gender, email } = item;
+  console.log(item);
+  const firstName = name?.first || 'User';
+  const lastName = name?.last || 'Test';
+
+  const handleViewProfile = () => {
+
+  }
+
+  return (
+    <Grid item lg={3} md={6} xs={12}>
+      <div className="card">
+        <img src={picture.large} className="card-img-top" alt={gender} />
+        <div className="card-body">
+          <h5 className="card-title">Name: {firstName}{lastName}</h5>
+          <p className="card-text">Email: {email}</p>
+          <LoadingButton className="viewBtn" onClick={handleViewProfile}>View Profile</LoadingButton>
+        </div>
+      </div>
+    </Grid>
+  );
+};
 
 const Users = memo(({ users, handleClick, loading, total }) => (
-    <BoxWrapper>
-        <Grid container spacing={2}>
-            {loading ? (
-                <LoadingWrapper>
-                    <CircularProgress />
-                </LoadingWrapper>
-            ) : (
-                users?.map((item, index) => <UserCard key={index} item={item} />)
-            )}
-            <Grid item lg={12} md={12}>
-                <ReactPaginate
-                    previousLabel={"previous"}
-                    nextLabel={"next"}
-                    breakLabel={"..."}
-                    pageCount={total}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={3}
-                    onPageChange={handleClick}
-                    containerClassName={"pagination justify-content-center"}
-                    pageClassName={"page-item"}
-                    pageLinkClassName={"page-link"}
-                    previousClassName={"page-item"}
-                    previousLinkClassName={"page-link"}
-                    nextClassName={"page-item"}
-                    nextLinkClassName={"page-link"}
-                    breakClassName={"page-item"}
-                    breakLinkClassName={"page-link"}
-                    activeClassName={"active"}
-                />
-            </Grid>
-        </Grid>
-    </BoxWrapper>
+  <Grid container spacing={2}>
+    {loading ? (
+      <LoadingWrapper>
+        <CircularProgress />
+      </LoadingWrapper>
+    ) : (
+      users?.map((item, index) => <UserCard key={index} item={item} />)
+    )}
+    <Grid item lg={12} md={12}>
+      <ReactPaginate
+        previousLabel={"previous"}
+        nextLabel={"next"}
+        breakLabel={"..."}
+        pageCount={total}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={3}
+        onPageChange={handleClick}
+        containerClassName={"pagination justify-content-center"}
+        pageClassName={"page-item"}
+        pageLinkClassName={"page-link"}
+        previousClassName={"page-item"}
+        previousLinkClassName={"page-link"}
+        nextClassName={"page-item"}
+        nextLinkClassName={"page-link"}
+        breakClassName={"page-item"}
+        breakLinkClassName={"page-link"}
+        activeClassName={"active"}
+      />
+    </Grid>
+  </Grid>
 ));
 
 export default Users;

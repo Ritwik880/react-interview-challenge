@@ -3,14 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import { useSnackbar } from '../context/SnackBarContext';
 
-const useApi = (uri) => {
+const useApi = () => {
+    const URL = `https://randomuser.me/api/?results=19`;
+
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [total, setTotal] = useState(0);
     const snackbar = useSnackbar();
 
-    const newUrl = `${uri}&page=${page}`;
+    const newUrl = `${URL}&page=${page}`;
 
     const getUsers = async (link) => {
         try {

@@ -13,7 +13,7 @@ const PostPage = memo(() => {
 
     useEffect(() => {
         setIsLoading(true); // Set isLoading to true before loading data
-
+ 
         // Simulate loading for 3 seconds, replace this with your actual data loading logic
         const loadingTimer = setTimeout(() => {
             setIsLoading(false); // After loading, set isLoading to false
