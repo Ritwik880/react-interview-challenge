@@ -83,3 +83,11 @@ export const LoadingWrapper = styled(Box)({
     height: '60vh',
     width: '100%'
 });
+
+
+export const ColumnWrapper = styled(Box)({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column'
+})

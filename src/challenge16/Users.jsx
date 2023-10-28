@@ -33,13 +33,6 @@ const UserCard = ({ item }) => {
 
 const Users = memo(({ users, handleClick, loading, total }) => (
   <Grid container spacing={2}>
-    {loading ? (
-      <LoadingWrapper>
-        <CircularProgress />
-      </LoadingWrapper>
-    ) : (
-      users?.map((item, index) => <UserCard key={index} item={item} />)
-    )}
     <Grid item lg={12} md={12}>
       <ReactPaginate
         previousLabel={"previous"}
@@ -61,6 +54,14 @@ const Users = memo(({ users, handleClick, loading, total }) => (
         activeClassName={"active"}
       />
     </Grid>
+    {loading ? (
+      <LoadingWrapper>
+        <CircularProgress />
+      </LoadingWrapper>
+    ) : (
+      users?.map((item, index) => <UserCard key={index} item={item} />)
+    )}
+    
   </Grid>
 ));
 
