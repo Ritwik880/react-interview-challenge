@@ -41,7 +41,7 @@ const Challenge4 = memo(() => {
         }
 
         return filteredData.map((user) => (
-            <Grid item lg={4} md={6} xs={12} key={user.id}>
+            <Grid item lg={4} md={6} xs={12} key={user.id} mt={3}>
                 <Card variant="outlined">
                     <CardContent>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -78,14 +78,18 @@ const Challenge4 = memo(() => {
                         />
 
                         <Grid container spacing={2}>
-                            {value !== '' ? (
-                                renderCards(items)
-                            ) : (
-                                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-                                    <Typography fontSize={30} fontWeight={500} sx={{ paddingTop: '20px' }} color="text.secondary" gutterBottom>
-                                        No Data to show!
-                                    </Typography>
+                            {loading ? (
+                                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100vh' }}>
+                                    <CircularProgress />
                                 </Box>
+                            ) : (
+                                value !== '' ? renderCards(items) : (
+                                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+                                        <Typography fontSize={30} fontWeight={500} sx={{ paddingTop: '20px' }} color="text.secondary" gutterBottom>
+                                            No Data to show!
+                                        </Typography>
+                                    </Box>
+                                )
                             )}
                         </Grid>
                     </Grid>

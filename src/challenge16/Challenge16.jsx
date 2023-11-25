@@ -1,21 +1,18 @@
-// Write two functional components to display a list broken into pages that are traversable via a list of clickable page numbers below the list. The first component — the parent component — should fetch a list of users and conditionally render a loading status or the next component, the actual list generated from the data. The user array fetched in the parent component should be passed to the child component as a prop along with the number of items that should be displayed on each page. The child component should display the first page of items and clickable links to the remaining pages of users
-
-import React, { memo, useCallback } from 'react';
-import { UserWrapper } from '../styles/StyledComponent';
-import Users from './Users';
+import React, { memo } from 'react';
 import useApi from './useApi';
-
+import {UserWrapper} from '../styles/StyledComponent';
+import Users from './Users';
 const Challenge16 = memo(() => {
     const { users, loading, total, setPage } = useApi();
+    console.log(users);
 
-    // Wrap the handleClick function with useCallback to memoize it
-    const handleClick = useCallback((selectedPage) => {
+    const handlePageClick = (selectedPage)=>{
         setPage(selectedPage.selected + 1);
-    }, [setPage]);
+    }
 
     return (
         <UserWrapper>
-            <Users users={users} handleClick={handleClick} loading={loading} total={total} />
+            <Users users={users} loading={loading} handlePageClick={handlePageClick} total={total}/>
         </UserWrapper>
     );
 });

@@ -9,6 +9,7 @@ import { Routes, Route } from 'react-router-dom';
 
 //css
 import './App.css';
+const UrlShortner = lazy(() => import('./challenge23/UrlShortner'));
 const MiniChallenge4 = lazy(() => import('./challenge23/MiniChallenge4'));
 const MiniChallenge2 = lazy(() => import('./challenge23/MiniChallenge2'));
 const MiniChallenge1 = lazy(() => import('./challenge23/MiniChallenge1'));
@@ -22,6 +23,7 @@ const Challenge18 = lazy(() => import('./challenge18/Challenge18'));
 const OptimiseChallenge18 = lazy(() => import('./challenge18/OptimiseChallenge18'));
 const OptimiseChallenge17 = lazy(() => import('./challenge17/OptimiseChallenge17'));
 const Challenge17 = lazy(() => import('./challenge17/Challenge17'));
+const User = lazy(() => import('./challenge16/User'));
 const Challenge16 = lazy(() => import('./challenge16/Challenge16'));
 const Challenge15 = lazy(() => import('./challenge15/Challenge15'));
 const OptimiseChallenge14 = lazy(() => import('./challenge14/OptimiseChallenge14'));
@@ -83,6 +85,7 @@ const App = () => {
         <Route path="/optimiseChallenge14" element={<OptimiseChallenge14 />} />
         <Route path="/challenge15" element={<Challenge15 />} />
         <Route path="/challenge16" element={<Challenge16 />} />
+        <Route path="/user/:id" element={<User />} />
         <Route path="/challenge17" element={<Challenge17 />} />
         <Route path="/optimiseChallenge17" element={<OptimiseChallenge17 />} />
         <Route path="/challenge18" element={<Challenge18 />} />
@@ -96,6 +99,7 @@ const App = () => {
         <Route path="/miniChallenge1" element={<MiniChallenge1 />} />
         <Route path="/miniChallenge2" element={<MiniChallenge2 />} />
         <Route path="/miniChallenge4" element={<MiniChallenge4 />} />
+        <Route path="/url-short" element={<UrlShortner />} />
         <Route path="*" element={<NotFound />} />
 
       </Routes>

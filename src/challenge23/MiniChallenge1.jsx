@@ -1,4 +1,5 @@
-// Create a React component that increments a counter when a button is clicked. Note: The challenge is to implement it in such a way that it doesn't use the useState hook or class state.
+// Create a React component that increments a counter when a button is clicked. 
+// Note: The challenge is to implement it in such a way that it doesn't use the useState hook or class state.
 
 import React, { useState, useRef, memo } from 'react';
 import { BodyWrapper, ColumnWrapper } from '../styles/StyledComponent';
